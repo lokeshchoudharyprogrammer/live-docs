@@ -3,6 +3,16 @@ import localFont from "next/font/local";
 import {Inter } from "next/font/google"
 import {NuqsAdapter} from "nuqs/adapters/next/app"
 import "./globals.css";
+import { ConvexClientProvider } from "@/components/convex-client-provider";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
+
 
 const inter= Inter({
   subsets:["latin"]
@@ -25,8 +35,11 @@ export default function RootLayout({
       <body
         className={inter.className}
       >
+        
       <NuqsAdapter>
+        <ConvexClientProvider>
         {children}
+        </ConvexClientProvider>
       </NuqsAdapter>
       </body>
     </html>
