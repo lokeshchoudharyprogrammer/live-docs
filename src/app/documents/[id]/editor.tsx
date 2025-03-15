@@ -27,15 +27,18 @@ import TextAlign from '@tiptap/extension-text-align'
 import { FontSizeExtenstion } from '@/extensions/font-size'
 import { LineHeightExtenstion } from '@/extensions/line-height'
 import Ruler from './ruler'
+import {Threads} from "./threads"
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 
 
 const Editor = () => {
 
     const { setEditor } = useEditorStore();
-    
+    const liveblocks = useLiveblocksExtension();
     
     const editor = useEditor({
-        // inmmediatelyRender:false Fix Later SSR
+        // inmmediatelyRender:false ,// Fix Later SSR
+        immediatelyRender:false,
         onCreate({ editor }) {
             setEditor(editor)
         },
@@ -67,6 +70,7 @@ const Editor = () => {
             }
         },
         extensions: [
+            liveblocks,
             LineHeightExtenstion.configure({
                 types: ['heading', 'paragraph'],
                 defaultLineHeight:"normal"
@@ -86,7 +90,10 @@ const Editor = () => {
             TextStyle,
             FontFamily,
             UnderLine,
-            StarterKit,
+            StarterKit.configure({
+                // The Liveblocks extension comes with its own history handling
+                history: false,
+              }),
             TaskItem.configure({
                 nested: true,
             }),
@@ -104,12 +111,11 @@ const Editor = () => {
             Image,
             Dropcursor,
             ImageResize
-        ],
+        ]
+        ,
         content: `
-        <p>This is a basic example of implementing images. Drag to re-order.</p>
-        <img src="https://placehold.co/800x400" />
-        <img src="https://placehold.co/800x400/6A00F5/white" />
-      `,
+        
+        `,
     })
 
     return (
@@ -117,6 +123,8 @@ const Editor = () => {
            <Ruler/>
             <div className='min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0 '>
                 <EditorContent editor={editor} />
+                <Threads editor={editor} />
+           
             </div>
         </div>
     )

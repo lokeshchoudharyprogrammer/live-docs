@@ -633,7 +633,7 @@ const Toolbar = () => {
 
     const { editor } = useEditorStore()
 
-    console.log(editor)
+ 
     const sections: {
         label: string;
         icon: LucideIcon;
@@ -700,9 +700,10 @@ const Toolbar = () => {
                 {
                     label: "Comment",
                     icon: MessageSquarePlusIcon,
-                    isActive: false,
-                    onClick: () => console.log("yes"),
-                }
+                    onClick: () => editor?.chain().focus().addPendingComment().run(),
+                    isActive: editor?.isActive("liveblocksCommentMark")
+                  }
+                  
 
                 ,
                 {

@@ -6,6 +6,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { UserButton,OrganizationSwitcher } from "@clerk/clerk-react";
 
 
 
@@ -235,6 +236,16 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            <div className="flex gap-3 items-center pl-6">
+
+<OrganizationSwitcher
+afterCreateOrganizationUrl="/"
+afterLeaveOrganizationUrl="/"
+afterSelectOrganizationUrl="/"
+afterSelectPersonalUrl="/"
+/>
+<UserButton/>
+</div>
         </nav>
     )
 

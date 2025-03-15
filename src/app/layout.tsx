@@ -12,7 +12,9 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
-
+import { Toaster } from "@/components/ui/toaster";
+import "@liveblocks/react-ui/styles.css";
+import "@liveblocks/react-tiptap/styles.css";
 
 const inter= Inter({
   subsets:["latin"]
@@ -38,6 +40,7 @@ export default function RootLayout({
         
       <NuqsAdapter>
         <ConvexClientProvider>
+          <Toaster/>
         {children}
         </ConvexClientProvider>
       </NuqsAdapter>
