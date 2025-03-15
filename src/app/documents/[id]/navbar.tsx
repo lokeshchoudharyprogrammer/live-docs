@@ -6,70 +6,74 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { UserButton,OrganizationSwitcher } from "@clerk/clerk-react";
+import { UserButton, OrganizationSwitcher } from "@clerk/clerk-react";
+
 
 
 
 import DocumentInput from './document-input';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarShortcut } from "@/components/ui/menubar";
-import { FileIcon, FileJsonIcon, GlobeIcon, Redo2Icon,UnderlineIcon,  FileTextIcon,TextIcon, PrinterIcon, FilePlusIcon, FilePenIcon, TrashIcon, Undo2Icon,BoldIcon ,ItalicIcon
-    ,RemoveFormattingIcon
+import {
+    FileIcon, FileJsonIcon, GlobeIcon, Redo2Icon, UnderlineIcon, FileTextIcon, TextIcon, PrinterIcon, FilePlusIcon, FilePenIcon, TrashIcon, Undo2Icon, BoldIcon, ItalicIcon
+    , RemoveFormattingIcon
 } from "lucide-react";
 import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/store/use-editor-store";
+import { Avatars } from "./avatars";
+import { Inbox } from "./inbox";
 
 
 const Navbar = () => {
 
-    const {editor}=useEditorStore()
+    const { editor } = useEditorStore()
 
-    const insertTable=({rows,cols}:{rows:number,cols:number})=>{
-        editor?.chain().focus().insertTable({rows,cols,withHeaderRow:false}).run()
+    const insertTable = ({ rows, cols }: { rows: number, cols: number }) => {
+        editor?.chain().focus().insertTable({ rows, cols, withHeaderRow: false }).run()
     }
 
-    const onDownload=(blob:Blob,filename:string)=>{
-        const url=URL.createObjectURL(blob);
-        const a=document.createElement("a");
-        a.href=url;
-        a.download=filename
+    const onDownload = (blob: Blob, filename: string) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename
         a.click()
 
     }
-    const onSaveJSON=()=>{
-        if(!editor) return ;
+    const onSaveJSON = () => {
+        if (!editor) return;
 
-        const content=editor.getJSON();
+        const content = editor.getJSON();
 
-        const blob=new Blob([JSON.stringify(content)],{
-            type:"application/json"
+        const blob = new Blob([JSON.stringify(content)], {
+            type: "application/json"
         });
 
-        onDownload(blob,"doc.json")
+        onDownload(blob, "doc.json")
 
     }
-    const onSaveHTML=()=>{
-        if(!editor) return ;
+    const onSaveHTML = () => {
+        if (!editor) return;
 
-        const content=editor.getHTML();
+        const content = editor.getHTML();
 
-        const blob=new Blob([content],{
-            type:"text/html"
+        const blob = new Blob([content], {
+            type: "text/html"
         });
 
-        onDownload(blob,"doc.html")
+        onDownload(blob, "doc.html")
 
     }
 
-    const onSaveText=()=>{
-        if(!editor) return ;
+    const onSaveText = () => {
+        if (!editor) return;
 
-        const content=editor.getText();
+        const content = editor.getText();
 
-        const blob=new Blob([content],{
-            type:"text/plain"
+        const blob = new Blob([content], {
+            type: "text/plain"
         });
 
-        onDownload(blob,"doc.txt")
+        onDownload(blob, "doc.txt")
 
     }
 
@@ -107,7 +111,7 @@ const Navbar = () => {
                                                 HTML
 
                                             </MenubarItem>
-                                            <MenubarItem onClick={()=>window.print()}>
+                                            <MenubarItem onClick={() => window.print()}>
                                                 <BsFilePdf className="size-4 mr-2" />
                                                 PDF
                                             </MenubarItem>
@@ -152,11 +156,11 @@ const Navbar = () => {
                                     Edit
                                 </MenubarTrigger>
                                 <MenubarContent>
-                                    <MenubarItem onClick={()=>editor?.chain().focus().undo().run()} >
+                                    <MenubarItem onClick={() => editor?.chain().focus().undo().run()} >
                                         <Undo2Icon className="size-4 mr-2" />
                                         Undo <MenubarShortcut>⎌</MenubarShortcut>
                                     </MenubarItem>
-                                    <MenubarItem  onClick={()=>editor?.chain().focus().redo().run()} >
+                                    <MenubarItem onClick={() => editor?.chain().focus().redo().run()} >
                                         <Redo2Icon className="size-4 mr-2" />
                                         Redo <MenubarShortcut>⎌</MenubarShortcut>
                                     </MenubarItem>
@@ -172,16 +176,16 @@ const Navbar = () => {
                                             Table
                                         </MenubarSubTrigger>
                                         <MenubarSubContent>
-                                            <MenubarItem onClick={()=>insertTable({rows:1,cols:1})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 1, cols: 1 })}>
                                                 1 X 1
                                             </MenubarItem>
-                                            <MenubarItem onClick={()=>insertTable({rows:2,cols:2})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 2, cols: 2 })}>
                                                 2 X 2
                                             </MenubarItem>
-                                            <MenubarItem onClick={()=>insertTable({rows:3,cols:3})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 3, cols: 3 })}>
                                                 3 X 3
                                             </MenubarItem>
-                                            <MenubarItem onClick={()=>insertTable({rows:4,cols:5})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 4, cols: 5 })}>
                                                 4 X 4
                                             </MenubarItem>
                                         </MenubarSubContent>
@@ -197,35 +201,35 @@ const Navbar = () => {
                                 <MenubarContent>
                                     <MenubarSub>
                                         <MenubarSubTrigger>
-                                            <TextIcon className="size-4 mr-2"/>
+                                            <TextIcon className="size-4 mr-2" />
                                             Text
                                         </MenubarSubTrigger>
                                         <MenubarSubContent>
 
                                             <MenubarItem>
-                                            <BoldIcon className="size-4 mr-2" onClick={()=>editor?.chain().focus().toggleBold().run()}/>
+                                                <BoldIcon className="size-4 mr-2" onClick={() => editor?.chain().focus().toggleBold().run()} />
                                                 Bold
                                             </MenubarItem>
-                                        
+
                                             <MenubarItem>
-                                            <ItalicIcon className="size-4 mr-2"  onClick={()=>editor?.chain().focus().toggleItalic().run()}/>
+                                                <ItalicIcon className="size-4 mr-2" onClick={() => editor?.chain().focus().toggleItalic().run()} />
                                                 Italic
                                             </MenubarItem>
-                                      
-                                        
+
+
                                             <MenubarItem>
-                                            <UnderlineIcon className="size-4 mr-2" onClick={()=>editor?.chain().focus().toggleUnderline().run()}/>
+                                                <UnderlineIcon className="size-4 mr-2" onClick={() => editor?.chain().focus().toggleUnderline().run()} />
                                                 UnderLine
-                                            </MenubarItem>                                        
+                                            </MenubarItem>
 
                                             {/* <MenubarItem>
                                                 <StrickthroughIcon className="size-4 mr-2"/>
                                                     Strickthrough
                                             </MenubarItem> */}
-                                        </MenubarSubContent> 
+                                        </MenubarSubContent>
                                     </MenubarSub>
-                                    <MenubarItem  onClick={()=>editor?.chain().focus().unsetAllMarks().run()}>
-                                        <RemoveFormattingIcon className="size-4 mr-2"/>
+                                    <MenubarItem onClick={() => editor?.chain().focus().unsetAllMarks().run()}>
+                                        <RemoveFormattingIcon className="size-4 mr-2" />
                                         Clear Formatting
                                     </MenubarItem>
                                 </MenubarContent>
@@ -237,15 +241,17 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex gap-3 items-center pl-6">
+                <Avatars />
+                <Inbox/>
 
-<OrganizationSwitcher
-afterCreateOrganizationUrl="/"
-afterLeaveOrganizationUrl="/"
-afterSelectOrganizationUrl="/"
-afterSelectPersonalUrl="/"
-/>
-<UserButton/>
-</div>
+                <OrganizationSwitcher
+                    afterCreateOrganizationUrl="/"
+                    afterLeaveOrganizationUrl="/"
+                    afterSelectOrganizationUrl="/"
+                    afterSelectPersonalUrl="/"
+                />
+                <UserButton />
+            </div>
         </nav>
     )
 

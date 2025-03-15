@@ -7,8 +7,9 @@ import {
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
 import { useParams } from "next/navigation";
+import {Id} from "../../../../convex/_generated/dataModel";
 
-import { getUsers } from "./actions";
+import { getUsers,getDocuments } from "./actions";
 import { toast } from "sonner";
 
 type User = { id: string, name: string, avatar: string };
@@ -44,22 +45,37 @@ export function Room({ children }: { children: ReactNode }) {
   return (
     <LiveblocksProvider
       throttle={16}
-      authEndpoint={"/api/liveblocks-auth"}
+      authEndpoint={async () => {
+        const endpoint = "/api/liveblocks-auth";
+        const room = params.id as string;
+        const res = await fetch(endpoint, {
+          method: "POST",
+          body: JSON.stringify({ room })
+        });
+        return await res.json()
+      }}
 
-      resolveMentionSuggestions={({text}) =>{
-        let filter=users;
-        if(text){
-          filter=users.filter((user)=>user.name.toLowerCase().includes(text.toLowerCase()))
+      resolveMentionSuggestions={({ text }) => {
+        let filter = users;
+        if (text) {
+          filter = users!.filter((user) => user.name.toLowerCase().includes(text.toLowerCase()))
         }
-        return  filter.map((user)=>user.id)
+        return filter!.map((user) => user.id)
       }}
-      resolveUsers={({userIds}) => {
-        return userIds.map((userId)=>users.find((usesr)=>user.id===userId)??undefined)
+      resolveUsers={({ userIds }) => {
+        return userIds.map((userId) => users!.find((user) => user.id === userId) ?? undefined)
       }}
-      resolveRoomsInfo={() => []}
+
+      resolveRoomsInfo={async ({roomIds})=>{
+        const docs=await getDocuments(roomIds as Id<"documents">[])
+        return docs.map((doc)=>({
+          id:doc.id,
+          name:doc.name
+        }))
+      }}
 
     >
-      <RoomProvider id={params.id as string}>
+      <RoomProvider id={params.id as string} initialStorage={{leftMargin:56,rightMargin:56}}>
         <ClientSideSuspense fallback={<div>Loading…</div>}>
           {children}
         </ClientSideSuspense>

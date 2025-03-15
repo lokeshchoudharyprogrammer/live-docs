@@ -1,3 +1,4 @@
+import { useMutation, useStorage } from '@liveblocks/react';
 import React, { useState, useRef } from 'react';
 import { FaCaretDown } from "react-icons/fa";
 
@@ -5,8 +6,21 @@ import { FaCaretDown } from "react-icons/fa";
 const markers = Array.from({ length: 83 }, (_, i) => i);
 
 const Ruler = () => {
+
+    const leftMargin=useStorage((root)=>root.leftMargin) ?? 56;
+    // const rightMargin=useStorage((root)=>root.rightMargin)
+
+    const setLeftmargin=useMutation(({storage},position:number)=>{
+        storage.set("leftMargin",position)
+
+    },[])
+
+    // const setRightmargin=useMutation(({storage},position:number)=>{
+    //     storage.set("leftMargin",position)
+
+    // },[])
+
     // Creating an array of markers (83 in this case)
-    const [leftMargin, setLeftMargin] = useState(56)
     const [rightMargin, setRightMargin] = useState(56)
 
     const [isDraggingLeft, setIsDraggingLeft] = useState(false)
@@ -35,7 +49,7 @@ const Ruler = () => {
                     const maxLeftPosition = 816 - rightMargin - 100;
                     const newLeftPosition = Math.min(rawPosition, maxLeftPosition);
 
-                    setLeftMargin(newLeftPosition);
+                    setLeftmargin(newLeftPosition);
                 } else if (isDraggingRight) {
                     const maxRightPosition = 816 - leftMargin - 100;
                     const newRightPosition = Math.max(816 - rawPosition, 0);
@@ -54,7 +68,7 @@ const Ruler = () => {
         setIsDraggingRight(false)
     }
     const handleLeftDoubleClick = () => {
-        setLeftMargin(56)
+        setLeftmargin(56)
 
     }
     const handleRightDoubleClick = () => {

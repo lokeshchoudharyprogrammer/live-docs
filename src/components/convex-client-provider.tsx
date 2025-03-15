@@ -29,7 +29,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
 
         <AuthLoading>
           <p >Please wait...</p>
-          {/* <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white to-gray-100">
+          <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white to-gray-100">
             <div className="relative w-24 h-24 flex items-center justify-center">
             <div className="absolute inset-0 rounded-full border-[6px] border-gray-200"></div>
             <div className="absolute inset-0 rounded-full border-[6px] border-t-blue-500 border-r-purple-500 animate-spin-slow shadow-xl shadow-blue-100"></div>
@@ -44,7 +44,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
             <div className="mt-6 w-48 h-2 bg-gray-200 rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-progress"></div>
             </div>
-          </div> */}
+          </div>
         </AuthLoading>
 
 
