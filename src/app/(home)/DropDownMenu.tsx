@@ -28,29 +28,29 @@ export const DropDownMenu = ({ documentId, title, onNewTab }: Props) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <RenameDialog documentId={documentId} initalTitle={title}>
-                    <DropdownMenuItem 
-                    onSelect={(e)=>e.preventDefault()}
-                    onClick={(e)=>e.stopPropagation()}
+                    <DropdownMenuItem
+                        onSelect={(e) => e.preventDefault()}
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        <FilePenIcon className='size-4 mr-2'/>
+                        <FilePenIcon className='size-4 mr-2' />
                         Rename
                     </DropdownMenuItem>
 
                 </RenameDialog>
                 <RemoveDialog documentId={documentId}>
-                    <DropdownMenuItem 
-                    onSelect={(e)=>e.preventDefault()}
-                    onClick={(e)=>e.stopPropagation()}
+                    <DropdownMenuItem
+                        onSelect={(e) => e.preventDefault()}
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        <TrashIcon className='size-4 mr-2'/>
+                        <TrashIcon className='size-4 mr-2' />
                         Remove
                     </DropdownMenuItem>
 
                 </RemoveDialog>
-            <DropdownMenuItem onClick={()=>onNewTab(documentId)}>
-            Open in a new tab
-            <ExternalLinkIcon className='size-4 mr-2s'/>
-            </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onNewTab(documentId)}>
+                    Open in a new tab
+                    <ExternalLinkIcon className='size-4 mr-2s' />
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )

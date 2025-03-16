@@ -8,20 +8,20 @@ const markers = Array.from({ length: 83 }, (_, i) => i);
 const Ruler = () => {
 
     const leftMargin=useStorage((root)=>root.leftMargin) ?? 56;
-    // const rightMargin=useStorage((root)=>root.rightMargin)
+    const rightMargin=useStorage((root)=>root.rightMargin) ?? 56
 
     const setLeftmargin=useMutation(({storage},position:number)=>{
         storage.set("leftMargin",position)
 
     },[])
 
-    // const setRightmargin=useMutation(({storage},position:number)=>{
-    //     storage.set("leftMargin",position)
+    const setRightMargin=useMutation(({storage},position:number)=>{
+        storage.set("rightMargin",position)
 
-    // },[])
+    },[])
 
     // Creating an array of markers (83 in this case)
-    const [rightMargin, setRightMargin] = useState(56)
+    // const [rightMargin, setRightMargin] = useState(56)
 
     const [isDraggingLeft, setIsDraggingLeft] = useState(false)
     const [isDraggingRight, setIsDraggingRight] = useState(false)

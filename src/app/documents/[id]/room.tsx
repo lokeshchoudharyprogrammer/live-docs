@@ -62,6 +62,7 @@ export function Room({ children }: { children: ReactNode }) {
         }
         return filter!.map((user) => user.id)
       }}
+      // @ts-expect-error
       resolveUsers={({ userIds }) => {
         return userIds.map((userId) => users!.find((user) => user.id === userId) ?? undefined)
       }}

@@ -31,14 +31,20 @@ import {Threads} from "./threads"
 import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { useStorage } from '@liveblocks/react'
 
+interface Props {
+    initialContent:string | undefined
+}
 
-const Editor = () => {
+const Editor = ({initialContent}:Props) => {
      
     const leftMargin=useStorage((root)=>root.leftMargin)
     const rightMargin=useStorage((root)=>root.rightMargin)
 
     const { setEditor } = useEditorStore();
-    const liveblocks = useLiveblocksExtension();
+    const liveblocks = useLiveblocksExtension({
+        initialContent,
+        offlineSupport_experimental:true
+    });
     
     const editor = useEditor({
         // inmmediatelyRender:false ,// Fix Later SSR

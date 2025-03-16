@@ -42,6 +42,7 @@ export const DocumentsTable = ({ documents, loadMore, status }: Props) => {
                         </TableRow>
                     </TableHeader>
 
+                    {/* @ts-ignore */}
                     {documents.length === 0 ? (
                         <TableBody>
                             <TableRow className="hover:bg-transparent">
@@ -52,6 +53,7 @@ export const DocumentsTable = ({ documents, loadMore, status }: Props) => {
                         </TableBody>
                     ) : (
                         <TableBody>
+                              {/* @ts-ignore */}
                            {documents.map((doc) => {
                                return <DocumentRow key={doc._id} document={doc} />
                            })}

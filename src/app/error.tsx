@@ -32,6 +32,7 @@ const ErrorPage=({
                     </h2>
 
                     <p>
+                        {/* @ts-ignore */}
                         {error.message}
                     </p>
 

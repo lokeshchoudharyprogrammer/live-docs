@@ -9,7 +9,7 @@ import { useSearchParam } from './../../hooks/use-search-param';
 
 export const SearchInput = () => {
 
-    const [search, setSearch] = useSearchParam("");
+    const [search, setSearch] = useSearchParam();
 
 
     const [value, setValue] = useState<string>('');
@@ -50,6 +50,7 @@ export const SearchInput = () => {
                         <Button onClick={() => {
                             setValue("")
                             inputRef.current?.blur()
+                          
                         }} type="button" variant="ghost"
                             size="icon"
                             className="absolute right-4 top-1/2 -translate-y-1/2 [&_svg]:size-5 rounded-full"

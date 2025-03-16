@@ -44,11 +44,19 @@ export async function POST(req: Request) {
     return new Response("Unauthorized", { status: 401 });
   }
 
+// const name=user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous",
+
+// const nameToNumber=name.split("").reduce((acc,char)=>acc+chat.charCodeAt(0),0);
+
+// const hue=Math.abs(nameToNumber) %360;
+// const color=`hsl(${hue},80%,60%)`
+
 
   const session=liveblock.prepareSession(user.id,{
     userInfo:{
         name:user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous",
-        avatar:user.imageUrl
+        avatar:user.imageUrl,
+        color:"green"
     }
   });
 
