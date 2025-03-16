@@ -37,10 +37,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
             <img src="/logo.svg" alt="App Logo" className="w-10 h-10 object-contain" />
             </div>
             </div>
-            
-            <p className="mt-8 text-2xl font-semibold text-gray-800 tracking-tight">Please wait...</p>
-
-          
+            <p className="mt-8 text-2xl font-semibold text-gray-800 tracking-tight">Please wait...</p>          
             <div className="mt-6 w-48 h-2 bg-gray-200 rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-progress"></div>
             </div>
