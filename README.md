@@ -30,8 +30,8 @@
 - **Framework**: Next.js 15
 - **UI**: Shadcn UI & Tailwind CSS
 - **Real-Time & Collaboration**: Liveblocks
-- **Authentication**: NextAuth.js
-- **Database**: Prisma & PostgreSQL
+- **Authentication**: Clerk & Convex for authentication
+- **Database**: Liveblocks
 - **Deployment**: Vercel
 - **Editor**: TipTap Editor with custom extensions
 
