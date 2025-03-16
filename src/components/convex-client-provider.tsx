@@ -28,7 +28,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
 
 
         <AuthLoading>
-          <p >Please wait...</p>
+         
           <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white to-gray-100">
             <div className="relative w-24 h-24 flex items-center justify-center">
             <div className="absolute inset-0 rounded-full border-[6px] border-gray-200"></div>
